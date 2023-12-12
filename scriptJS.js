@@ -83,11 +83,17 @@ var display_recipe_name = document.getElementById('display_recipe_name');
 var generate_button = document.getElementById('generate_btn');
 var reset_button = document.getElementById('reset_btn');
 var recipe_name = document.getElementById('input_recipe_name_text_box');
+var generate = false;
 
 generate_button.addEventListener('click', async function() 
 {
+    generate = true;
+
     let context = recipe_name.value;
-    
+    console.log(context);
+    let line_counter = 0;
+    let last_char_generated = ' ';
+
     if (context == ""){
         context = "fully generated recipe";
     }
@@ -95,28 +101,40 @@ generate_button.addEventListener('click', async function()
     let text_to_show = context;
 
     document.getElementById("input_paragraph").hidden = true;
-    document.getElementById("generate_btn").hidden = true;
+    document.getElementById('generate_btn').style.setProperty('display', 'none');
+    
 
-    for(let i = 0; i < 1000; i++)
+
+    while(generate)
     {
         let memo_char = await generateNextChar(context);
         text_to_show += memo_char;
-        if(context.length >= 126)
+        if(context.length >= 128)
         {
-            context.slice(1);
+            context = context.slice(1);
         }
         context += memo_char;
         document.getElementById('generated_text').innerText = text_to_show
         await new Promise(resolve => setTimeout(resolve,10));
+        
+        if (memo_char == '\n'){
+            line_counter += 1;
+        }
+        if ((memo_char == '\n' && last_char_generated == '\n') || line_counter >= 10)
+        {
+            generate = false;
+        }
+        last_char_generated = memo_char;
     }
 });
 
 
 reset_button.addEventListener('click', function() 
 {
-        display_recipe_name.innerHTML = "";
-        displayed_texte.innerHTML = "";
-        recipe_name.value = "";
-        document.getElementById("input_paragraph").hidden = false;
-        document.getElementById("generate_btn").hidden = false;
+    generate = false;
+    display_recipe_name.innerHTML = "";
+    displayed_texte.innerHTML = "";
+    recipe_name.value = "";
+    document.getElementById("input_paragraph").hidden = false;
+    document.getElementById('generate_btn').style.setProperty('display', 'block');
 });

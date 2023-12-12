@@ -12,20 +12,21 @@
 
         <h1>🍽️ LLM Recipe generator 👨‍🍳</h1>
 
-        <div id="input_paragraph" >
+        <div id="input_paragraph">
             <p>
                 What is the name of the recipe you want to create ? 
+                (if you put nothing, a totaly generated recipe will be made)
             </p>
-            <input type="text" id="input_recipe_name_text_box" name="name" size="32" value = "test" required minlength="1" maxlength="32"/>
+            <input type="text" id="input_recipe_name_text_box" name="name" size="32" required minlength="1" maxlength="32"/>
         </div>
-
+        
         <button id="generate_btn">generate the recipe</button>
         <button id="reset_btn">reset</button>
 
         <div id="generated_result">
             <span id="display_recipe_name"></span>
             <span id="generated_text"></span>
-    </div>
+        </div>
 
     </body> 
 
@@ -47,7 +48,8 @@
                 font-family:Arial;
                 font-size:20px;
                 padding:10px 30px;
-                text-decoration:none;font-family: 'Poppins', sans-serif}
+                text-decoration:none;font-family: 'Poppins', sans-serif;
+                }
         
         #generated_text {white-space: pre-wrap;}
         
@@ -64,6 +66,10 @@
             box-shadow: 5px 5px 14px rgba(66,66,66,.88);
             text-shadow: 0px 0px 5px rgba(66,66,66,.75);}
 
+        #generate_btn{
+            display: block;
+        }
+        
         @media screen and (max-width: 768px), screen and (max-height: 768px) {
             #card { border-radius: 12px; }
             #probs { height: 128px; border-radius: 0 0 8px; }
