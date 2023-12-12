@@ -22,5 +22,5 @@ model.eval()
 # context = torch.tensor([encode(user_input)], dtype=torch.long, device='cuda')
 # print(decode(model.generate(context, max_new_tokens=500)[0].tolist()))
 
-dummy_input = torch.zeros(1, 128, dtype=torch.long).to("cuda")
-torch.onnx.export(model, dummy_input, "./model_files/recipes.onnx", export_params=True, opset_version=9)
+dummy_input = torch.zeros(1, 128, dtype=torch.int32).to("cuda")
+torch.onnx.export(model, dummy_input, "./model_files/recipes.onnx",input_names=['inputs'], output_names=['outputs'], export_params=True, opset_version=10)
