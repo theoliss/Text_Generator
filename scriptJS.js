@@ -113,7 +113,7 @@ generate_button.addEventListener('click', async function()
             context = context.slice(1);
         }
         context += memo_char;
-        document.getElementById('generated_text').innerText = text_to_show
+        document.getElementById('generated_text').innerText = text_to_show;
         await new Promise(resolve => setTimeout(resolve,10));
         
         if (memo_char == '\n'){
