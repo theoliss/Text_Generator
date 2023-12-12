@@ -99,7 +99,6 @@ generate_button.addEventListener('click', async function()
     }
     context += " :\n";
     let text_to_show = context;
-
     document.getElementById("input_paragraph").hidden = true;
     document.getElementById('generate_btn').style.setProperty('display', 'none');
     
