@@ -13,7 +13,7 @@ def process_one_line(input : str) -> str:
 
 with open('./dataset/processed_dataset.txt', 'w') as data_write:
     for i, index in tqdm(enumerate(data.index), desc = 'Writing in file'):
-        if(index < 1000):    
+        if(index % 50 == 0):    
             data_write.write(process_one_line(str(data['name'][i])) + ':\n')
             for j in data['steps'][i]:
                 data_write.write('-' + process_one_line(str(j)) + '\n')

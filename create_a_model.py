@@ -7,14 +7,14 @@ from tqdm import tqdm
 # hyperparameters
 batch_size = 128 # how many independent sequences will we process in parallel?
 block_size = 128 # what is the maximum context length for predictions?
-max_iters = 5000
-eval_interval = 500
+max_iters = 25000
+eval_interval = 25000
 learning_rate = 3e-4
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 eval_iters = 200
 n_embd = 384
-n_head = 4
-n_layer = 4
+n_head = 6
+n_layer = 6
 dropout = 0.2
 # ------------
 
@@ -224,7 +224,7 @@ if (__name__) == ("__main__"):
 
     # generate from the model
 
-    torch.save(model.state_dict(), './model_files/recipes.pt')
+    torch.save(model.state_dict(), './model_files/recipes_big_train.pt')
 
     context = torch.tensor(encode("Chcken soup with mooshrooms :"), dtype=torch.long, device=device)
     #context = torch.zeros((1, 1), dtype=torch.long, device=device)
