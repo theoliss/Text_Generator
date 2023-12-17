@@ -87,6 +87,13 @@ var generate = false;
 
 generate_button.addEventListener('click', async function() 
 {
+    if (!session) {
+        document.getElementById('not_loaded_yet').removeAttribute("hidden");
+        return;
+    }
+    else 
+    {
+    document.getElementById('not_loaded_yet').setAttribute("hidden", true);
     generate = true;
 
     let context = recipe_name.value;
@@ -124,6 +131,7 @@ generate_button.addEventListener('click', async function()
             generate = false;
         }
         last_char_generated = memo_char;
+    }
     }
 });
 
