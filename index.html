@@ -1,93 +1,141 @@
 <!DOCTYPE html>
-
 <html lang="en">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>LLM Recipe Generator</title>
-    </head>
-    
-    <body>
 
-        <h1>🍽️ LLM Recipe generator 👨‍🍳</h1>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Recipe Generator</title>
+</head>
 
-        <div id="input_paragraph">
-            <p>
-                What is the name of the recipe you want to create ? 
-                (if you put nothing, a totaly generated recipe will be made)
-            </p>
-            <input type="text" id="input_recipe_name_text_box" name="name" size="32" required minlength="1" maxlength="32"/>
-        </div>
-        
-        <button id="generate_btn">generate the recipe</button>
-            <p id="not_loaded_yet" hidden>
-                The model have not been generate yet, please wait a bit before retrying
-            </p>
-        <button id="reset_btn">reset</button>
+<body>
 
-        <div id="generated_result">
-            <span id="display_recipe_name"></span>
-            <span id="generated_text"></span>
-        </div>
+    <h1>🍽️ LLM Recipe generator 👨‍🍳</h1>
 
-    </body> 
+    <div id="input_paragraph">
+        <p>
+            What is the name of the recipe you want to create?
+            (If you put nothing, a totally generated recipe will be made)
+        </p>
+        <input type="text" id="input_recipe_name_text_box" name="name" placeholder="Enter recipe name" required minlength="1" maxlength="32" style="width: 80%; max-width: 300px;">
+    </div>
 
-    <style>
-        
-        :root, html, body { padding: 0px; margin: 0px;  line-height: 1.2; width: 100%; height: 100%; background-color: rgb(27, 27, 27); }
-        
-        body { font-family: 'Poppins', sans-serif; font-size: 16px; display: flex; flex-direction: column; align-items: center;  gap: 1rem; color: #ffffff; white-space: pre-wrap;}
-        
-        h1 {font-size: 30px; color : orange; align-items: center;}
-        
-        button {box-shadow: 0px 7px 0px 0px #8a8a8a;
-                background-color:#d1d1d1;
-                border-radius:20px;
-                border:5px solid #707070;
-                display:inline-block;
-                cursor:pointer;
-                color:#000000;
-                font-family:Arial;
-                font-size:20px;
-                padding:10px 30px;
-                text-decoration:none;font-family: 'Poppins', sans-serif;
-                }
-        
-        #generated_text {white-space: pre-wrap;}
-        
-        #input_recipe_name_text_box {
-            font-family: 'Poppins', sans-serif;
-            padding: 5px;
-            font-size: 20px;
-            border-width: 0px;
-            border-color: #CCCCCC;
-            background-color: #FFFFFF;
-            color: #000000;
-            border-style: solid;
-            border-radius: 50px;
-            box-shadow: 5px 5px 14px rgba(66,66,66,.88);
-            text-shadow: 0px 0px 5px rgba(66,66,66,.75);}
+    <button id="generate_btn">Generate Recipe</button>
+    <p id="not_loaded_yet" hidden>
+        The model has not been generated yet. Please wait a bit before retrying.
+    </p>
+    <button id="reset_btn">Reset</button>
 
-        #generate_btn{
-            display: block;
+    <div id="generated_result">
+        <span id="display_recipe_name"></span>
+        <span id="generated_text"></span>
+    </div>
+
+</body>
+
+<style>
+    :root,
+    html,
+    body {
+        padding: 0px;
+        margin: 0px;
+        line-height: 1.2;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(27, 27, 27);
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        font-size: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        color: #ffffff;
+        white-space: pre-wrap;
+    }
+
+    h1 {
+        font-size: 30px;
+        color: orange;
+        align-items: center;
+    }
+
+    button {
+        box-shadow: 0px 7px 0px 0px #8a8a8a;
+        background-color: #d1d1d1;
+        border-radius: 20px;
+        border: 5px solid #707070;
+        display: inline-block;
+        cursor: pointer;
+        color: #000000;
+        font-family: 'Poppins', sans-serif;
+        font-size: 20px;
+        padding: 10px 20px;
+        text-decoration: none;
+    }
+
+    #generated_text {
+        white-space: pre-wrap;
+    }
+
+    #input_recipe_name_text_box {
+        font-family: 'Poppins', sans-serif;
+        padding: 5px;
+        font-size: 20px;
+        border-width: 0px;
+        border-color: #CCCCCC;
+        background-color: #FFFFFF;
+        color: #000000;
+        border-style: solid;
+        border-radius: 20px;
+        box-shadow: 5px 5px 14px rgba(66, 66, 66, .88);
+        text-shadow: 0px 0px 5px rgba(66, 66, 66, .75);
+    }
+
+    #generate_btn {
+        display: block;
+        width: 80%;
+        max-width: 300px;
+        margin-top: 10px;
+    }
+
+    @media screen and (max-width: 768px),
+    screen and (max-height: 768px) {
+        #card {
+            border-radius: 12px;
         }
-        
-        @media screen and (max-width: 768px), screen and (max-height: 768px) {
-            #card { border-radius: 12px; }
-            #probs { height: 128px; border-radius: 0 0 8px; }
-            .digit { top: 0.5rem; font-size: 0.4rem; font-weight: 700; }
-        }
-        
-        @media screen and (max-width: 1536px), screen and (max-height: 1536px) {
-            #card { border-radius: 18px; }
-            #probs { border-radius: 0 0 12px; }
-            .digit { top: 1rem; font-size: 1rem; }
+
+        #probs {
+            height: 128px;
+            border-radius: 0 0 8px;
         }
 
-    </style>
+        .digit {
+            top: 0.5rem;
+            font-size: 0.4rem;
+            font-weight: 700;
+        }
+    }
 
-    <script src="https://cdn.jsdelivr.net/npm/onnxjs/dist/onnx.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
-    <script src="scriptJS.js"></script>   
+    @media screen and (max-width: 1536px),
+    screen and (max-height: 1536px) {
+        #card {
+            border-radius: 18px;
+        }
 
+        #probs {
+            border-radius: 0 0 12px;
+        }
+
+        .digit {
+            top: 1rem;
+            font-size: 1rem;
+        }
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/onnxjs/dist/onnx.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
+<script src="scriptJS.js"></script>
 
 </html>
