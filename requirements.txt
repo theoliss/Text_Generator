@@ -1,0 +1,5 @@
+pandas==2.1.4
+onnxruntime==1.16.1
+torch==2.1.0+cu118
+tqdm==4.66.1
+tiktoken==0.5.2
